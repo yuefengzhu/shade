@@ -1,0 +1,19 @@
+<h1> Throw some Shade </h1>
+
+<ul>
+	{% for player in allPlayers%}
+	<li> player: {{player.playerName}}
+		<form action="/removePlayer/{{player.id}}" style="display:inline"method="post">{% csrf_token %}
+			<input type="submit" value="Remove player"/>
+		</form>	
+	</li>
+		
+	{% endfor %}
+
+</ul>
+
+<form action="/createPlayer/" method="post">{% csrf_token %}
+	<input type="text" name="playerName"/> 
+	<input type="text" name="what"/> 
+	<input type="submit" value="Add"/>
+</form>
