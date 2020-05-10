@@ -32,5 +32,7 @@ from GameManager.urls import urlpatterns as GameManagerUrlPatterns
 from django.urls import path,include
 
 urlpatterns = [
+	path('',include('frontend.urls')),
     path('',include('GameManager.urls'))
+
 ]
