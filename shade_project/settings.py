@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'hello',
     'GameManager',
     'rest_framework',
-    'frontend'
+    'frontend' 
 ]
 
 MIDDLEWARE = [
