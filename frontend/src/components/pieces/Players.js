@@ -5,7 +5,9 @@ import {getPlayers, removePlayer} from '../../actions/Players';
 
 export class Players extends Component {
 	static propTypes = {
-		players: PropTypes.array.isRequired
+		players: PropTypes.array.isRequired,
+		getPlayers: PropTypes.func.isRequired,
+		removePlayer: PropTypes.func.isRequired
 	};
 
 	componentDidMount() {

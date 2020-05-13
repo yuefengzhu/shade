@@ -7,17 +7,24 @@ import Dashboard from './pieces/Dashboard';
 import {Provider} from 'react-redux';
 import store from '../store';
 
+
+
+//Alert options
+const alertOptions = {
+	timeout: 3000,
+	position:'top center'
+};
+
 class App extends Component{
 	render(){
 		return(
 			<Provider store = {store}>
-				<Fragment>
-					<Header />
-					<div className="container">
-						<Dashboard />
-					</div>
-
-				</Fragment>
+					<Fragment>
+						<Header />
+						<div className="container">
+							<Dashboard />
+						</div>
+					</Fragment>
 			</Provider>
 			
 		)
