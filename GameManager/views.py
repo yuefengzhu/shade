@@ -29,5 +29,5 @@ def getAllPlayers(request):
 	return render(request,'AllPlayers.html',{'allPlayers':allPlayers})
 
 def heartBeat(request):
-	return HttpResponse('received heartbeat')
+	return HttpResponse('received heartbeat new')
 

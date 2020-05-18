@@ -28,11 +28,11 @@ Including another URLconf
 #     # path('heartBeat', heartBeat)
 #     path('', include('GameManager.urls'))
 # ]
-from GameManager.urls import urlpatterns as GameManagerUrlPatterns
 from django.urls import path,include
 
 urlpatterns = [
 	path('',include('frontend.urls')),
-    path('',include('GameManager.urls'))
+    path('',include('GameManager.urls')),
+    path('',include('accounts.urls'))
 
 ]

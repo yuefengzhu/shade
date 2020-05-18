@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-import {GET_PLAYERS,REMOVE_PLAYER,ADD_PLAYER} from './types'
+import {GET_PLAYERS,REMOVE_PLAYER,ADD_PLAYER, GET_ERRORS} from './types'
+
+import {returnErrors} from './messages'
 
 // GET PLAYERS
 export const getPlayers = () => dispatch =>{
@@ -12,7 +14,9 @@ export const getPlayers = () => dispatch =>{
 				payload: res.data
 
 			});
-		}).catch(err => console.log(err));
+		}).catch(err => {
+			const errors = dispatch(returnErrors(err.response.data, err.response.status));
+		});
 };
 
 // Remove PLAYER
@@ -38,5 +42,7 @@ export const addPlayer = (player) => dispatch =>{
 				payload: res.data
 
 			});
-		}).catch(err => console.log(err));
+		}).catch(err => {
+			const errors = dispatch(returnErrors(err.response.data, err.response.status));
+		});
 };

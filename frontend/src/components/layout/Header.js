@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
-
+import React, { Component} from 'react';
+import { Link } from "react-router-dom";
+// import Login from '../accounts/Login';
+// import Register from '../accounts/Register';
 export class Header extends Component {
 	render(){
 		return(
@@ -15,7 +17,10 @@ export class Header extends Component {
 			        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
 			      </li>
 			      <li className="nav-item">
-			        <a className="nav-link" href="#">Link</a>
+			        <Link to="/login" className="nav-link">Login</Link>
+			      </li>
+			      <li className="nav-item">
+			        <Link to="/register" className="nav-link">Register</Link>
 			      </li>
 			      <li className="nav-item dropdown">
 			        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,14 +34,14 @@ export class Header extends Component {
 			        </div>
 			      </li>
 			      <li className="nav-item">
-			        <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+			        <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Saved Burns</a>
 			      </li>
 			    </ul>
 			    
 			  </div>
 			</nav>
-		)
+		);
 	}
 }
 
-export default Header
+export default Header;
