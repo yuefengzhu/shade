@@ -4,7 +4,9 @@ import {HashRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import Header from './layout/Header';
 import Dashboard from './pieces/Dashboard';
 import Alerts from './layout/Alerts';
-
+import Login from './accounts/Login';
+import Register from './accounts/Register';
+import PrivateRoute from "./common/PrivateRoute";
 import {Provider} from 'react-redux';
 import store from '../store';
 import {Provider as AlertProvider} from 'react-alert';
@@ -28,8 +30,9 @@ class App extends Component{
 							<Alerts />
 							<div className="container">
 								<Switch>
-									<Route exact path='/' component = {Dashboard}/>
-
+									<PrivateRoute exact path="/" component = {Dashboard} />
+									<Route exact path="/login" component = {Login} />
+									<Route exact path="/register" component = {Register} />
 								</Switch>
 							</div>
 						</Fragment>
