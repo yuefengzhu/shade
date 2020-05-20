@@ -11,6 +11,7 @@ import {Provider} from 'react-redux';
 import store from '../store';
 import {Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+import {loadUser} from '../actions/auth';
 
 //Alert options
 const alertOptions = {
@@ -19,6 +20,10 @@ const alertOptions = {
 };
 
 class App extends Component{
+	componentDidMount(){
+		console.log('app mounted');
+		store.dispatch(loadUser());
+	}
 	render(){
 		return(
 			<Provider store = {store}>
