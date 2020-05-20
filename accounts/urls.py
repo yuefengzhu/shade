@@ -7,7 +7,7 @@ urlpatterns = [
 	path('api/register/', RegisterAPI.as_view()),
 	path('api/login/', LoginAPI.as_view()),
 	path('api/getUser/', UserAPI.as_view()),
-	path('api/auth/', include('knox.urls')),
+	path('api/logout/', knox_views.LogoutView.as_view(), name = 'knox_logout'),
+	path('api/auth/', include('knox.urls'))
 	#destroy
-	path('api/auth/logout', knox_views.LogoutView.as_view(), name = 'knox_logout')
 ]
