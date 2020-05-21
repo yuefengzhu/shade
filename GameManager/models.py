@@ -13,7 +13,7 @@ class Game(models.Model):
 
 
 class Player(models.Model):
-	playerName= models.CharField(max_length=16, unique=True),
+	playerName= models.CharField(max_length=16, unique= True)
 	owner = models.ForeignKey(User,related_name="Player", on_delete=models.CASCADE, null=True)
 
 

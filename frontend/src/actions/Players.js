@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-import {GET_PLAYERS,REMOVE_PLAYER,ADD_PLAYER, GET_ERRORS} from './types'
+import {GET_PLAYERS,REMOVE_PLAYER,ADD_PLAYER, GET_ERRORS} from './types';
 
-import {returnErrors} from './messages'
+import {returnErrors} from './messages';
 
-// GET PLAYERS
-export const getPlayers = () => dispatch =>{
+import {getTokenConfig} from './auth'
+
+// GET PLAYERS gestate for token
+export const getPlayers = () => (dispatch,getState) =>{
 	axios
-		.get('/api/Player/')
+		.get('/api/Player/',getTokenConfig(getState))
 		.then(res => {
 			dispatch({
 				type:GET_PLAYERS,
@@ -20,9 +22,9 @@ export const getPlayers = () => dispatch =>{
 };
 
 // Remove PLAYER
-export const removePlayer = (id) => dispatch =>{
+export const removePlayer = (id) => (dispatch,getState) =>{
 	axios
-		.delete(`/api/Player/${id}/`)
+		.delete(`/api/Player/${id}/`,getTokenConfig(getState))
 		.then(res => {
 			dispatch({
 				type:REMOVE_PLAYER,
@@ -33,9 +35,11 @@ export const removePlayer = (id) => dispatch =>{
 };
 
 // ADD PLAYERS
-export const addPlayer = (player) => dispatch =>{
+export const addPlayer = (player) => (dispatch,getState) =>{
+	console.log('adding player');
+	console.log(player);
 	axios
-		.post('/api/Player/', player)
+		.post('/api/Player/', player,getTokenConfig(getState))
 		.then(res => {
 			dispatch({
 				type:ADD_PLAYER,

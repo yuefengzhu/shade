@@ -12,6 +12,11 @@ export class Players extends Component {
 
 	componentDidMount() {
 		this.props.getPlayers();
+		console.log('mounting'+this.props.players);
+
+		this.props.players.map(player =>(
+			console.log('player: '+player.playerName)
+			))
 	}
 
 	render(){
@@ -24,7 +29,7 @@ export class Players extends Component {
 					</thead>
 					<tbody>
 						{this.props.players.map(player => (
-							<tr key={player.id }>
+							<tr key={player.id}>
 								<td>{player.playerName}</td>
 								<td><button onClick={this.props.removePlayer.bind(this,player.id)} className="btn nt-danger btn-sm"> remove player</button></td>
 							</tr>
