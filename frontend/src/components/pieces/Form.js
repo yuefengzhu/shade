@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {addPlayer} from '../../actions/Players'
+import {addPlayer,firstPlayer,getPlayers} from '../../actions/Players'
 
 export class Form extends Component {
 	state = {
@@ -15,19 +15,20 @@ export class Form extends Component {
 	onChange = e => this.setState({ [e.target.name]:e.target.value});
 
 	onSubmit = e =>{
-		console.log('joining a game')
+		console.log('joining a game');
 		e.preventDefault();
 		const {playerName, roomName, password} = this.state;
 		const player = {playerName, roomName};
+		this.props.getPlayers();
 		this.props.addPlayer(player);
 	}
 	onSubmitNewGame = e =>{
-
+		console.log('creating new lobby');
 		e.preventDefault();
 		const {playerName, roomName, password} = this.state;
-		const player = {playerName};
+		const player = {playerName,roomName};
 		console.log('submitting alternative');
-		// this.props.addPlayer(player);
+		this.props.firstPlayer(player);
 	}
 	render(){
 		const {playerName, roomName, password} = this.state;
@@ -82,4 +83,4 @@ export class Form extends Component {
 	}
 }
 
-export default connect(null, {addPlayer})(Form);
+export default connect(null, {addPlayer,firstPlayer,getPlayers})(Form);

@@ -6,18 +6,32 @@ import {getPlayers, removePlayer} from '../../actions/Players';
 export class Players extends Component {
 	static propTypes = {
 		players: PropTypes.array.isRequired,
+		roomName: PropTypes.string,
 		getPlayers: PropTypes.func.isRequired,
 		removePlayer: PropTypes.func.isRequired
 	};
 
 	componentDidMount() {
-		allPlayers=this.props.players;
+		this.props.getPlayers();
 		
 	}
 
 	onSubmit = (e) => {
 		e.preventDefault();
-		console.log('starting game, sending players to game with this game id')
+		console.log('starting game, sending players to game with this game id');
+	};
+	isInRoom({prop}){
+		console.log('in room');
+		console.log(prop.players);
+		if(prop.players.roomName === this.props.roomName){
+			return(
+
+					<tr key={player.id}>
+						<td>{player.playerName}</td>
+						<td><button onClick={this.props.removePlayer.bind(this.player.id)} className="btn nt-danger btn-sm"> remove player</button></td>
+					</tr>
+				)
+		}
 	};
 
 	render(){
@@ -31,11 +45,11 @@ export class Players extends Component {
 					</div>
 					<tbody>
 						{this.props.players.map(player => (
-							<tr key={player.id}>
-								<td>{player.playerName}</td>
-								<td><button onClick={this.props.removePlayer.bind(this,player.id)} className="btn nt-danger btn-sm"> remove player</button></td>
-							</tr>
-
+							(player.roomName === this.props.roomName)?	
+								<tr key={player.id}>
+									<td>{player.playerName}</td>
+									<td><button onClick={this.props.removePlayer.bind(this, player.id)} className="btn nt-danger btn-sm"> remove player</button></td>
+								</tr>:''
 						))}
 					</tbody>
 				</table>
@@ -47,7 +61,9 @@ export class Players extends Component {
 }
 
 const mapStateToProps = state =>({
-	players: state.PlayerReducer.players
+	players: state.PlayerReducer.players,
+	roomName: state.PlayerReducer.roomName
+
 })
 
 export default connect(mapStateToProps,{getPlayers, removePlayer})(Players);

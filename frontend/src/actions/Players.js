@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {GET_PLAYERS,REMOVE_PLAYER,ADD_PLAYER, GET_ERRORS} from './types';
+import {GET_PLAYERS,REMOVE_PLAYER,ADD_PLAYER, GET_ERRORS, FIRST_PLAYER, FILTER_ROOM} from './types';
 
 import {returnErrors} from './messages';
 
@@ -16,8 +16,8 @@ export const getPlayers = () => (dispatch,getState) =>{
 				payload: res.data
 
 			});
+			
 		}).catch(err => {
-			console.log('action player: '+err.response);
 			const errors = dispatch(returnErrors(err.response.data, err.response.status));
 		});
 };
@@ -44,8 +44,26 @@ export const addPlayer = (player) => (dispatch,getState) =>{
 		.then(res => {
 			dispatch({
 				type:ADD_PLAYER,
-				payload: res.data
+				payload: res.data,
+				roomName:res.data.roomName
+			});
+			
+		}).catch(err => {
+			const errors = dispatch(returnErrors(err.response.data, err.response.status));
+		});
+};
 
+// ADD PLAYERS
+export const firstPlayer = (player) => (dispatch,getState) =>{
+	console.log('adding new player');
+	console.log(player);
+	axios
+		.post('/api/Player/', player,getTokenConfig(getState))
+		.then(res => {
+			dispatch({
+				type:FIRST_PLAYER,
+				payload: res.data,
+				roomName:res.data.roomName
 			});
 		}).catch(err => {
 			const errors = dispatch(returnErrors(err.response.data, err.response.status));
