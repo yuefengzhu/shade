@@ -17,6 +17,7 @@ export const getPlayers = () => (dispatch,getState) =>{
 
 			});
 		}).catch(err => {
+			console.log('action player: '+err.response);
 			const errors = dispatch(returnErrors(err.response.data, err.response.status));
 		});
 };

@@ -6,7 +6,7 @@ import {addPlayer} from '../../actions/Players'
 export class Form extends Component {
 	state = {
 		playerName:'',
-		roomname:'',
+		roomName:'',
 		password:''
 	}
 	static propTypes = {
@@ -15,11 +15,19 @@ export class Form extends Component {
 	onChange = e => this.setState({ [e.target.name]:e.target.value});
 
 	onSubmit = e =>{
+		console.log('joining a game')
+		e.preventDefault();
+		const {playerName, roomName, password} = this.state;
+		const player = {playerName, roomName};
+		this.props.addPlayer(player);
+	}
+	onSubmitNewGame = e =>{
 
 		e.preventDefault();
-		const {playerName, roomname, password} = this.state;
+		const {playerName, roomName, password} = this.state;
 		const player = {playerName};
-		this.props.addPlayer(player);
+		console.log('submitting alternative');
+		// this.props.addPlayer(player);
 	}
 	render(){
 		const {playerName, roomName, password} = this.state;
@@ -42,7 +50,7 @@ export class Form extends Component {
 			  			<input 
 			  				className="form-control"
 			  			 	type="text"
-			  			 	name="roomname" 
+			  			 	name="roomName" 
 			  			 	onChange={this.onChange}
 			  			 	value = {roomName} 
 			  			/>
@@ -59,8 +67,13 @@ export class Form extends Component {
 			  		</div>
 			  		<div className="form-group">
 			  			<button type="Submit" className="btn btn-primary">
-			  				Submit
+			  				Join Game
 			  			</button>
+			  			
+			  			<button type="Submit" onClick={this.onSubmitNewGame.bind(this)}className="btn btn-primary float-right">
+			  				Create New Game
+			  			</button>
+			  			
 			  		</div>
 			  	</form>
 			</div>

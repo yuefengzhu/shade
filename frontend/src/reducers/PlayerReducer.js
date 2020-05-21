@@ -9,7 +9,7 @@ export default function(state = initialState, action) {
 		case GET_PLAYERS:
 			return {
 				...state,
-				players: action.payload
+				players: action.payload.filter(player => player.roomName === 'exampleroom')
 			};
 		case REMOVE_PLAYER:
 			return {

@@ -11,22 +11,24 @@ export class Players extends Component {
 	};
 
 	componentDidMount() {
-		this.props.getPlayers();
-		console.log('mounting'+this.props.players);
-
-		this.props.players.map(player =>(
-			console.log('player: '+player.playerName)
-			))
+		allPlayers=this.props.players;
+		
 	}
+
+	onSubmit = (e) => {
+		e.preventDefault();
+		console.log('starting game, sending players to game with this game id')
+	};
 
 	render(){
 		return (
 			<Fragment>
-				<h2>Players</h2>
+			<div className="card card-body mt-4 mb-4">
+				<h2>Lobby</h2>
 				<table className= "table table-striped">
-					<thead>
-						<th>Players</th>
-					</thead>
+					<div class="card-header">
+						Players
+					</div>
 					<tbody>
 						{this.props.players.map(player => (
 							<tr key={player.id}>
@@ -37,6 +39,8 @@ export class Players extends Component {
 						))}
 					</tbody>
 				</table>
+				<button className="btn btn-primary" type="submit">Start Game</button>
+			</div>
 			</Fragment>
 		)
 	}
