@@ -1,10 +1,22 @@
 import axios from 'axios';
 
-import {GET_PLAYERS,REMOVE_PLAYER,ADD_PLAYER, GET_ERRORS, FIRST_PLAYER, FILTER_ROOM} from './types';
+import {GET_PLAYERS,REMOVE_PLAYER,ADD_PLAYER, GET_ERRORS, FIRST_PLAYER, FILTER_ROOM, START_GAME, ENTER_LOBBY, LEAVE_LOBBY, LEAVE_GAME} from './types';
 
 import {returnErrors} from './messages';
 
 import {getTokenConfig} from './auth'
+
+
+export const startGame = () => (dispatch, getState) =>{
+	dispatch({
+		type:START_GAME,
+	});
+}
+export const enterLobby = () => (dispatch, getState) =>{
+	dispatch({
+		type:ENTER_LOBBY,
+	});
+}
 
 // GET PLAYERS gestate for token
 export const getPlayers = () => (dispatch,getState) =>{

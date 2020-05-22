@@ -14,3 +14,7 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 export const CLEAR_USERS = "CLEAR_USERS";
 export const CREATE_MESSAGE = 'CREATE_MESSAGE';
 export const FILTER_ROOM = 'FILTER_ROOM';
+export const START_GAME = 'START_GAME';
+export const ENTER_LOBBY = 'ENTER_LOBBY';
+export const LEAVE_GAME = 'LEAVE_GAME';
+export const LEAVE_LOBBY = 'LEAVE_LOBBY';

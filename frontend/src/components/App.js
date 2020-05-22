@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import {HashRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import Header from './layout/Header';
 import Dashboard from './pieces/Dashboard';
+import Game from './pieces/Game';
 import Alerts from './layout/Alerts';
+import Form from './pieces/Form';
+import Players from './pieces/Players';
 import Login from './accounts/Login';
 import Register from './accounts/Register';
 import PrivateRoute from "./common/PrivateRoute";
@@ -35,9 +38,11 @@ class App extends Component{
 							<Alerts />
 							<div className="container">
 								<Switch>
-									<PrivateRoute exact path="/" component = {Dashboard} />
+									<PrivateRoute exact path="/" component = {Form} />
+									<PrivateRoute exact path="/lobby" component = {Players}/>
 									<Route exact path="/login" component = {Login} />
 									<Route exact path="/register" component = {Register} />
+									<PrivateRoute exact path="/game" component ={Game} />
 								</Switch>
 							</div>
 						</Fragment>

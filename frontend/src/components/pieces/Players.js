@@ -1,40 +1,34 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {getPlayers, removePlayer} from '../../actions/Players';
+import {getPlayers, removePlayer, startGame} from '../../actions/Players';
+import { Link, Redirect } from 'react-router-dom';
 
 export class Players extends Component {
 	static propTypes = {
 		players: PropTypes.array.isRequired,
 		roomName: PropTypes.string,
+		isGameStarted: PropTypes.bool,
 		getPlayers: PropTypes.func.isRequired,
-		removePlayer: PropTypes.func.isRequired
+		removePlayer: PropTypes.func.isRequired,
+		startGame: PropTypes.func.isRequired
 	};
 
 	componentDidMount() {
 		this.props.getPlayers();
-		
 	}
 
-	onSubmit = (e) => {
+	startGameSubmit = (e) => {
 		e.preventDefault();
 		console.log('starting game, sending players to game with this game id');
+		this.props.startGame();
 	};
-	isInRoom({prop}){
-		console.log('in room');
-		console.log(prop.players);
-		if(prop.players.roomName === this.props.roomName){
-			return(
 
-					<tr key={player.id}>
-						<td>{player.playerName}</td>
-						<td><button onClick={this.props.removePlayer.bind(this.player.id)} className="btn nt-danger btn-sm"> remove player</button></td>
-					</tr>
-				)
-		}
-	};
 
 	render(){
+		if(this.props.isGameStarted){
+			return <Redirect to="/game" />;
+		}
 		return (
 			<Fragment>
 			<div className="card card-body mt-4 mb-4">
@@ -53,7 +47,9 @@ export class Players extends Component {
 						))}
 					</tbody>
 				</table>
-				<button className="btn btn-primary" type="submit">Start Game</button>
+				<div className="form-group">
+					<button className="btn btn-primary" type="Submit" onClick={this.startGameSubmit.bind(this)} >Start Game</button>
+				</div>
 			</div>
 			</Fragment>
 		)
@@ -62,8 +58,9 @@ export class Players extends Component {
 
 const mapStateToProps = state =>({
 	players: state.PlayerReducer.players,
-	roomName: state.PlayerReducer.roomName
+	roomName: state.PlayerReducer.roomName,
+	isGameStarted: state.PlayerReducer.isGameStarted
 
 })
 
-export default connect(mapStateToProps,{getPlayers, removePlayer})(Players);
+export default connect(mapStateToProps,{getPlayers, removePlayer, startGame})(Players);

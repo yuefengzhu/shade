@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {addPlayer,firstPlayer,getPlayers} from '../../actions/Players'
+import {addPlayer,firstPlayer,getPlayers,enterLobby} from '../../actions/Players'
+import { Link, Redirect } from 'react-router-dom';
 
 export class Form extends Component {
 	state = {
@@ -10,28 +11,33 @@ export class Form extends Component {
 		password:''
 	}
 	static propTypes = {
-		addPlayer: PropTypes.func.isRequired
+		addPlayer: PropTypes.func.isRequired,
+		isLobbyOpen: PropTypes.bool
 	}
 	onChange = e => this.setState({ [e.target.name]:e.target.value});
 
 	onSubmit = e =>{
-		console.log('joining a game');
+		console.log('joining a lobby');
 		e.preventDefault();
 		const {playerName, roomName, password} = this.state;
 		const player = {playerName, roomName};
-		this.props.getPlayers();
 		this.props.addPlayer(player);
+		this.props.enterLobby();
+
 	}
 	onSubmitNewGame = e =>{
 		console.log('creating new lobby');
 		e.preventDefault();
 		const {playerName, roomName, password} = this.state;
 		const player = {playerName,roomName};
-		console.log('submitting alternative');
 		this.props.firstPlayer(player);
+		this.props.enterLobby();
 	}
 	render(){
 		const {playerName, roomName, password} = this.state;
+		if(this.props.isLobbyOpen){
+			return <Redirect to="/lobby" />;
+		}
 		return (
 			<div className="card card-body mt-4 mb-4">
 			  	<h2> Join a Game </h2>
@@ -82,5 +88,8 @@ export class Form extends Component {
 		)
 	}
 }
+const mapStateToProps = state =>({
+	isLobbyOpen: state.PlayerReducer.isLobbyOpen,
 
-export default connect(null, {addPlayer,firstPlayer,getPlayers})(Form);
+})
+export default connect(mapStateToProps, {addPlayer,firstPlayer,getPlayers,enterLobby})(Form);
